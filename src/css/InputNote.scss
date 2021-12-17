@@ -1,0 +1,48 @@
+#input-content {
+  color: white;
+  width: 100%;
+  font-size: 2rem !important;
+  background: none;
+  border: none;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+#input-title {
+  font-size: 5rem !important;
+}
+
+#input-tag {
+  font-size: 1.2rem !important;
+  margin: 1rem 0;
+}
+
+.tags-btn {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  padding: 5px 5px 5px 15px;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  background: #0077B6 !important;
+  margin-right: 10px;
+}
+
+.global-tag-btn{
+  padding: 10px 20px;
+  display: inline;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  background: #0077B6 !important;
+  margin-right: 10px;
+}
+
+.note-input {
+
+  &::after,
+  &::before {
+    border-bottom: none !important;
+  }
+}

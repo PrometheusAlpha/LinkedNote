@@ -1,0 +1,14 @@
+.note-content {
+  min-height: 100vh;
+  max-width: 60ch;
+  text-align: left;
+
+  &__title {
+    color: white;
+  }
+
+  &__content {
+    color: white;
+    font-size: 2rem;
+  }
+}
