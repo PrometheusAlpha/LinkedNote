@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './css/App.scss';
 import InputNote from './components/InputNote';
 import Note from './components/Note';
 import { Box, Stack, Button } from '@mui/material';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import AddIcon from '@mui/icons-material/Add';
+import Search from './components/Search';
 
 interface NoteContent {
   title: string;
@@ -12,11 +13,12 @@ interface NoteContent {
   tags: string[];
 }
 
-
 function App() {
   const [listNote, setListNote] = useState([] as NoteContent[])
   const [globalTagList, setGlobalTagList] = useState([] as string[])
   const [currentNoteIndex, setIndex] = useState(-2)
+  const [searchVisible, setSearchVisible] = useState(false)
+
 
   const addNote = (note: NoteContent) => {
     listNote.push(note);
@@ -28,6 +30,15 @@ function App() {
     globalTagList.push(tag);
     setGlobalTagList(globalTagList);
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "b" && e.ctrlKey) {
+      setSearchVisible(!searchVisible);
+    }
+    if (e.key === "Escape") {
+      setSearchVisible(false);
+    }
+  });
 
   return (
     <Box style={{ display: 'flex' }}>
@@ -54,7 +65,7 @@ function App() {
           )
         })}
       </Box>
-      <Box sx={{ padding: "7rem", marginLeft: "250px" }}>
+      <Box sx={{ padding: "10rem", marginLeft: "250px" }}>
         {currentNoteIndex === -2 ?
           <InputNote
             addNote={addNote}
@@ -67,6 +78,12 @@ function App() {
           />
         }
       </Box>
+      {searchVisible &&
+        <Search
+          listNote={listNote}
+          setIndex={setIndex}
+          setSearchVisible={setSearchVisible}
+        />}
     </Box>
   );
 }

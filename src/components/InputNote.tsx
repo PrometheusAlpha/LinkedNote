@@ -1,11 +1,10 @@
 import Button from '@mui/material/Button';
 import "../css/InputNote.scss";
-import { Input, TextareaAutosize, Stack, IconButton } from '@mui/material';
+import { Input, TextareaAutosize, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import Paper from '@mui/material/Paper';
-
 
 export default function InputNote(props: any) {
 
@@ -17,7 +16,7 @@ export default function InputNote(props: any) {
     if (title === "" || content === "") {
       return;
     }
-    props.addNote({ title: title, content: content });
+    props.addNote({ title: title, content: content, tags: tags });
   }
 
   const addTag = (e: any) => {
@@ -36,6 +35,10 @@ export default function InputNote(props: any) {
     setTags([...tags, tag]);
   }
 
+  const removeTag = (tag: string) => {
+    setTags(tags.filter(t => t !== tag));
+  }
+
   return (
     <>
       <Input
@@ -47,16 +50,19 @@ export default function InputNote(props: any) {
       <TextareaAutosize
         placeholder="New idea starts here..."
         className="note-input"
-        minRows={12}
+        // minRows={3}
         id="input-content"
+        style={{ maxWidth: "60ch", minHeight: "3rem" }}
         autoComplete='off'
       />
+      <br />
       {props.previousTags.map((tag: string, index: number) => {
         return (
           <Paper
             className="global-tag-btn"
             key={index}
             onClick={() => addTagFromGlobal(tag)}
+            style={{ cursor: "pointer" }}
           >
             {tag}
           </Paper>
@@ -78,7 +84,7 @@ export default function InputNote(props: any) {
             key={index}
           >
             {tag}
-            <IconButton>
+            <IconButton onClick={() => removeTag(tag)}>
               <ClearIcon />
             </IconButton>
           </Paper>

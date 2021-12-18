@@ -1,0 +1,26 @@
+.search-result {
+  &__btn {
+    text-transform: none !important;
+    padding: 1.2rem 1.5rem !important;
+    justify-content: start !important;
+    border-radius: 1rem !important;
+    gap: 1rem;
+    margin: 10px !important;
+  }
+}
+
+.search {
+  border: 1px solid #3498db;
+  border-radius: 1rem;
+  background: #0a1929;
+
+  &__input {
+    padding: 20px;
+    gap: 15px;
+
+    &__icon {
+      font-size: 2rem;
+      color: #0077B6;
+    }
+  }
+}
