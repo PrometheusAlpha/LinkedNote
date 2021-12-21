@@ -14,9 +14,7 @@ export default function Search(props: any) {
     display: "flex",
   } as React.CSSProperties;
   const fullScreenOpaque = {
-    inset: "0",
-    position: "absolute",
-    display: "flex",
+    ...fullScreen,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.5)",
@@ -25,7 +23,7 @@ export default function Search(props: any) {
 
   const options = {
     shouldSort: true,
-    keys: ['title', 'content', 'tags'],
+    keys: ['title', 'content', 'tags', "ID"],
   };
 
   const searchEngine = new Fuse(props.listNote, options);
@@ -44,18 +42,24 @@ export default function Search(props: any) {
       <Box style={fullScreenOpaque}>
         <Box style={fullScreen} onClick={() => props.setSearchVisible(false)}>
         </Box>
-        <Stack className="search">
+        <Stack
+          className="search"
+        >
           <Stack direction="row" style={{ alignItems: "center" }} className="search__input">
             <SearchIcon className="search__input__icon" />
             <InputBase placeholder='Search... ' onChange={search} />
+            <Button
+              variant="outlined"
+              style={{ textTransform: "none" }}
+              disabled={true}>esc</Button>
           </Stack>
-          <Divider />
+          {searchResult.length > 0 && <Divider />}
           <Stack className="search-result">
             {searchResult.map((note: any, index: number) => {
               return (
                 <Button
+                  key={index}
                   variant="outlined"
-                  style={{ cursor: "pointer" }}
                   onClick={() => searchResultClick(note.refIndex)}
                   className="search-result__btn"
                 >

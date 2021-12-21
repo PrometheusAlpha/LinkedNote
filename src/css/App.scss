@@ -11,4 +11,36 @@ body {
   justify-content: start !important;
   width: 100%;
   text-transform: none;
+  &-active{
+    background: #0077B6 !important;
+  }
+}
+
+.search-btn {
+  border: 2px solid #023E8A;
+  position: absolute;
+  right: 12rem;
+  top: 1rem;
+  align-items: center;
+  padding: 7px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+
+  &:hover {
+    background: #001e3c;
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #3c6870;
+    margin: 0;
+  }
+
+  &__key {
+    padding: 1px;
+    text-transform: none;
+    font-weight: bold;
+  }
 }

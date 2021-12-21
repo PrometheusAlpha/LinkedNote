@@ -6,9 +6,21 @@ import { useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import Paper from '@mui/material/Paper';
 
+function makeid(length: number) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() *
+      charactersLength));
+  }
+  return result;
+}
+
 export default function InputNote(props: any) {
 
   const [tags, setTags] = useState([] as string[]);
+  const [links, setLinks] = useState([] as string[]);
 
   const addContentToNote = () => {
     const title = (document.querySelector('#input-title') as HTMLInputElement).value;
@@ -16,7 +28,7 @@ export default function InputNote(props: any) {
     if (title === "" || content === "") {
       return;
     }
-    props.addNote({ title: title, content: content, tags: tags });
+    props.addNote({ ID: makeid(8), title: title, content: content, tags: tags, links: links });
   }
 
   const addTag = (e: any) => {
@@ -37,6 +49,22 @@ export default function InputNote(props: any) {
 
   const removeTag = (tag: string) => {
     setTags(tags.filter(t => t !== tag));
+  }
+
+  const removeLink = (link: string) => {
+    links.filter(value => value !== link);
+    setLinks(links);
+  }
+
+  const addLink = (e: any) => {
+    if (e.key !== "Enter") { return; }
+    const link = (document.querySelector('#input-link') as HTMLInputElement).value;
+    if (link === "" || !(props.listID.includes(link))) {
+      console.log(props.listID)
+      return;
+    }
+    setLinks([...links, link]);
+    (document.querySelector('#input-link') as HTMLInputElement).value = "";
   }
 
   return (
@@ -85,6 +113,28 @@ export default function InputNote(props: any) {
           >
             {tag}
             <IconButton onClick={() => removeTag(tag)}>
+              <ClearIcon />
+            </IconButton>
+          </Paper>
+        )
+      })}
+      <br />
+      <Input
+        placeholder="Link tag... (press Enter to add)"
+        className="note-input"
+        id="input-link"
+        autoComplete='off'
+        onKeyDown={addLink}
+      />
+      <br />
+      {links.map((ID: string, index: number) => {
+        return (
+          <Paper
+            className="tags-btn"
+            key={ID}
+          >
+            {ID}
+            <IconButton onClick={() => removeLink(ID)}>
               <ClearIcon />
             </IconButton>
           </Paper>

@@ -2,6 +2,11 @@
   max-width: 60ch;
   color: white;
 
+  &__id {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
   &__title {
     margin-bottom: 2rem !important;
   }
@@ -9,4 +14,15 @@
   &__content {
     font-size: 2rem;
   }
+}
+
+.link-btn {
+  padding: 10px 20px;
+  display: inline;
+  margin-top: 5rem !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  background: #0077B6 !important;
+  margin-right: 10px;
+  cursor: pointer;
 }
